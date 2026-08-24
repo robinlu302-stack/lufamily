@@ -28,12 +28,21 @@
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     .custom-scrollbar::-webkit-scrollbar { width: 6px; height: 6px; }
     .custom-scrollbar::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 10px; }
+
+    /* 統一規範所有彈出視窗的預設外觀與一致的長寬高比例 */
+    .uniform-modal-container {
+      width: 100%;
+      max-width: 52rem; /* 相當於 max-w-4xl，統一所有彈出視窗寬度 */
+      height: 82vh;    /* 統一固定視窗高度基準 */
+      max-height: 750px;
+      display: flex;
+      flex-direction: column;
+    }
   </style>
 </head>
 
 <body class="text-slate-700">
 
-  <!-- 導覽列 -->
   <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
       <a href="#home" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
@@ -41,7 +50,6 @@
         <h1 class="font-bold text-base sm:text-lg text-slate-800 truncate">呂氏家庭生活資訊網 3.0</h1>
       </a>
 
-      <!-- 漢堡選單按鈕 -->
       <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-slate-700 p-2 focus:outline-none">
         <i id="mobileMenuIcon" class="fa-solid fa-bars"></i>
       </button>
@@ -49,7 +57,6 @@
       <div class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-500">
         <a href="#home" class="hover:text-indigo-600 transition-colors">首頁</a>
         
-        <!-- 最新消息下拉選單與超連結 -->
         <div class="relative group">
           <a href="#notice" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-2 focus:outline-none">
             <span>最新消息</span>
@@ -65,7 +72,6 @@
           </div>
         </div>
 
-        <!-- 關於我們下拉選單與超連結 -->
         <div class="relative group">
           <a href="#team-staff" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-2 focus:outline-none">
             <span>關於我們</span>
@@ -87,10 +93,8 @@
           </div>
         </div>
 
-        <!-- 年度活動超連結 -->
-        <a href="#unit-activities" class="hover:text-indigo-600 transition-colors py-2">年度活動</a>
+        <button onclick="openIndependentPage('activities')" class="hover:text-indigo-600 transition-colors py-2 font-bold bg-transparent border-0 cursor-pointer">年度活動</button>
 
-        <!-- 聯絡我們連結 -->
         <a href="#contact" class="hover:text-indigo-600 transition-colors py-2 font-bold">聯絡我們</a>
 
         <button onclick="openAdminMenuModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 text-white hover:bg-slate-900 transition-all font-black text-sm shadow-md">
@@ -99,7 +103,6 @@
       </div>
     </div>
 
-    <!-- 手機與平板漢堡清單下拉選單內容 -->
     <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-6 space-y-4 shadow-xl">
       <a href="#home" onclick="toggleMobileMenu()" class="block font-bold text-slate-700 hover:text-indigo-600 py-1">首頁</a>
       
@@ -134,7 +137,7 @@
       </div>
 
       <div class="border-t border-slate-100 pt-3 space-y-3">
-        <a href="#unit-activities" onclick="toggleMobileMenu()" class="block font-bold text-slate-700 hover:text-indigo-600 py-1">年度活動</a>
+        <button onclick="toggleMobileMenu(); openIndependentPage('activities')" class="w-full text-left font-bold text-slate-700 hover:text-indigo-600 py-1 bg-transparent border-0 cursor-pointer">年度活動</button>
         <a href="#contact" onclick="toggleMobileMenu()" class="block font-bold text-slate-700 hover:text-indigo-600 py-1">聯絡我們</a>
       </div>
 
@@ -146,7 +149,6 @@
     </div>
   </nav>
 
-  <!-- 首頁區 -->
   <section id="home" class="py-12 sm:py-16 flex items-center">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full">
       <div data-aos="fade-right" class="text-center lg:text-left lg:col-span-5">
@@ -154,7 +156,6 @@
         <p class="text-slate-500 font-medium mt-4 text-base sm:text-lg">呂氏家庭生活資訊網 3.0，凝聚 13 位成員的溫馨園地。</p>
       </div>
 
-      <!-- 輪播照片區塊 -->
       <div class="relative flex justify-center w-full lg:col-span-7" data-aos="fade-left">
         <div class="glass-card rounded-[30px] sm:rounded-[35px] p-2 sm:p-3 shadow-2xl border-white hover-float overflow-hidden w-full max-w-xl relative group">
           <div class="relative w-full h-[320px] sm:h-[420px] rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white">
@@ -182,11 +183,9 @@
     </div>
   </section>
 
-  <!-- 主要內容區 -->
   <section class="py-8 sm:py-10 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full">
       
-      <!-- 最新消息區 -->
       <div id="notice" class="mb-16 scroll-mt-24 pt-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
@@ -223,7 +222,6 @@
         </div>
       </div>
 
-      <!-- 隊職幹部橫向輪播清單區塊 (作為關於我們跳轉目標) -->
       <div id="team-staff" class="mb-16 scroll-mt-24 pt-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
@@ -234,7 +232,6 @@
               <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3 mb-6"></div>
             </div>
 
-            <!-- 年度切換按鈕 -->
             <div class="flex flex-col gap-2 pt-2">
               <button onclick="switchHomeTeamYear('25-26')" id="homeBtn2526" class="px-4 py-2.5 rounded-2xl bg-indigo-600 text-white font-black text-xs shadow-md transition-all text-center">25-26 幹部名單</button>
               <button onclick="switchHomeTeamYear('26-27')" id="homeBtn2627" class="px-4 py-2.5 rounded-2xl bg-white text-slate-600 border border-slate-200 font-black text-xs hover:border-indigo-600 transition-all text-center">26-27 幹部名單</button>
@@ -249,8 +246,7 @@
 
           <div class="lg:col-span-9 flex flex-col gap-6">
             <div id="homeTeamListContainer" class="grid grid-flow-col auto-cols-[minmax(280px,1fr)] gap-5 overflow-x-auto pb-4 no-scrollbar snap-x" style="min-height: 320px;">
-              <!-- 動態填入首頁隊職員清單 -->
-            </div>
+              </div>
 
             <div class="flex items-center justify-between gap-6 pt-2">
               <div class="flex-grow bg-slate-200 h-1.5 rounded-full overflow-hidden">
@@ -266,99 +262,12 @@
         </div>
       </div>
 
-      <!-- 本單位年度活動行銷月曆 (參考範本排版風格與圓形浮動視覺) -->
-      <section id="unit-activities" class="mb-10 scroll-mt-24 bg-gradient-to-b from-sky-50 to-blue-50/50 rounded-[40px] p-6 sm:p-12 border border-sky-100 shadow-xl relative overflow-hidden">
-        
-        <!-- 裝飾標題列 -->
-        <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-6 mb-12">
-          <div>
-            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-amber-300/80 text-amber-900 text-xs font-black mb-3 shadow-sm uppercase tracking-wider">
-              <i class="fa-solid fa-calendar-star"></i> 提早準備家庭活動囉
-            </div>
-            <h2 class="text-3xl sm:text-5xl font-black text-slate-900 tracking-tight">年度活動</h2>
-            <p class="text-slate-500 font-bold mt-2 text-sm sm:text-base">FAMILY ACTIVITY CALENDAR</p>
-          </div>
-          <div class="bg-white/80 backdrop-blur-md px-6 py-3 rounded-2xl border border-sky-200 shadow-sm flex items-center gap-3">
-            <span class="text-2xl sm:text-3xl font-black text-sky-600">Q1-Q4</span>
-            <span class="text-xs font-black text-slate-500 uppercase tracking-widest">家庭年度計劃</span>
-          </div>
-        </div>
-
-        <!-- 圓形漂浮卡片網格區塊 (對應參考範本風格) -->
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-10 items-center">
-          
-          <!-- 活動卡片 1：1月份 新年圍爐 -->
-          <div class="bg-white rounded-full w-full aspect-square max-w-[300px] mx-auto p-6 shadow-2xl border-4 border-white flex flex-col items-center justify-center text-center animate-floating hover-float relative group cursor-pointer" style="animation-delay: 0s;">
-            <div class="absolute -top-3 px-4 py-1 rounded-full bg-red-500 text-white font-black text-xs shadow-md uppercase">1 月份</div>
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-red-50 text-red-500 flex items-center justify-center text-3xl sm:text-4xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-utensils"></i>
-            </div>
-            <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-1">新年圍爐團聚</h3>
-            <p class="text-xs font-bold text-slate-400">家族團圓迎新春</p>
-          </div>
-
-          <!-- 活動卡片 2：5月份 母親節慶祝 (置中浮動) -->
-          <div class="bg-white rounded-full w-full aspect-square max-w-[300px] mx-auto p-6 shadow-2xl border-4 border-white flex flex-col items-center justify-center text-center animate-floating hover-float relative group cursor-pointer" style="animation-delay: 1.3s;">
-            <div class="absolute -top-3 px-4 py-1 rounded-full bg-pink-500 text-white font-black text-xs shadow-md uppercase">5 月份</div>
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-pink-50 text-pink-500 flex items-center justify-center text-3xl sm:text-4xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-cake-candles"></i>
-            </div>
-            <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-1">母親節慶祝</h3>
-            <p class="text-xs font-bold text-slate-400">感恩母愛溫馨獻禮</p>
-          </div>
-
-          <!-- 活動卡片 3：8月份 父親節慶祝 -->
-          <div class="bg-white rounded-full w-full aspect-square max-w-[300px] mx-auto p-6 shadow-2xl border-4 border-white flex flex-col items-center justify-center text-center animate-floating hover-float relative group cursor-pointer" style="animation-delay: 2.6s;">
-            <div class="absolute -top-3 px-4 py-1 rounded-full bg-blue-500 text-white font-black text-xs shadow-md uppercase">8 月份</div>
-            <div class="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-3xl sm:text-4xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-medal"></i>
-            </div>
-            <h3 class="text-xl sm:text-2xl font-black text-slate-900 mb-1">父親節慶祝</h3>
-            <p class="text-xs font-bold text-slate-400">致敬父親辛勞付出</p>
-          </div>
-
-        </div>
-
-        <!-- 第二排：9月與12月活動 -->
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 sm:gap-10 items-center max-w-2xl mx-auto mt-8 sm:mt-10">
-          
-          <!-- 活動卡片 4：9月份 中秋烤肉 -->
-          <div class="bg-white rounded-full w-full aspect-square max-w-[280px] mx-auto p-6 shadow-2xl border-4 border-white flex flex-col items-center justify-center text-center animate-floating hover-float relative group cursor-pointer" style="animation-delay: 1.8s;">
-            <div class="absolute -top-3 px-4 py-1 rounded-full bg-amber-500 text-white font-black text-xs shadow-md uppercase">9 月份</div>
-            <div class="w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-3xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-fire-burner"></i>
-            </div>
-            <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">中秋烤肉慶祝</h3>
-            <p class="text-xs font-bold text-slate-400">月圓人團圓烤肉趣</p>
-          </div>
-
-          <!-- 活動卡片 5：12月份 聖誕節 -->
-          <div class="bg-white rounded-full w-full aspect-square max-w-[280px] mx-auto p-6 shadow-2xl border-4 border-white flex flex-col items-center justify-center text-center animate-floating hover-float relative group cursor-pointer" style="animation-delay: 3.2s;">
-            <div class="absolute -top-3 px-4 py-1 rounded-full bg-emerald-500 text-white font-black text-xs shadow-md uppercase">12 月份</div>
-            <div class="w-18 h-18 sm:w-22 sm:h-22 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-3xl mb-3 shadow-inner group-hover:scale-110 transition-transform">
-              <i class="fa-solid fa-gifts"></i>
-            </div>
-            <h3 class="text-lg sm:text-xl font-black text-slate-900 mb-1">聖誕節慶祝</h3>
-            <p class="text-xs font-bold text-slate-400">歡樂交換禮物派對</p>
-          </div>
-
-        </div>
-
-        <div class="text-center mt-12">
-          <span class="text-xs font-bold text-sky-700 uppercase tracking-widest bg-white/60 px-6 py-2 rounded-full shadow-sm">
-            25-26年度活動
-          </span>
-        </div>
-
-      </section>
     </div>
   </section>
 
-  <!-- 聯絡我們區塊 -->
   <section id="contact" class="py-12 bg-[#f8fafc] border-t-0">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       
-      <!-- 裝飾標題列 -->
       <div class="text-center mb-10">
         <span class="text-orange-600 font-bold text-sm tracking-wider uppercase block mb-1">聯絡我們</span>
         <h2 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">CONTACT US</h2>
@@ -366,10 +275,8 @@
       </div>
 
       <div class="space-y-8">
-        <!-- 雙欄設計：將家庭服務與社群放在同一大區塊內並排 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          <!-- 核心服務 / 聯絡資訊方塊 1 -->
           <div class="bg-white rounded-[32px] p-6 sm:p-8 shadow-xl border border-orange-100 relative overflow-hidden flex flex-col">
             <div class="absolute top-0 left-0 right-0 h-2 bg-orange-600"></div>
             <div class="flex items-center gap-3 mb-4">
@@ -391,7 +298,6 @@
             </div>
           </div>
 
-          <!-- 聯絡社群 / QR Code 方塊 2 -->
           <div class="bg-white rounded-[32px] p-6 sm:p-8 shadow-xl border border-orange-100 relative overflow-hidden flex flex-col">
             <div class="absolute top-0 left-0 right-0 h-2 bg-orange-600"></div>
             <div class="flex items-center gap-3 mb-4">
@@ -415,9 +321,8 @@
     </div>
   </section>
 
-  <!-- 獨立彈出檢視頁面 Modal (支援分頁) -->
   <div id="independentPageModal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-900/70 backdrop-blur-md hidden">
-    <div class="bg-white rounded-[35px] sm:rounded-[45px] w-full max-w-4xl shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col custom-scrollbar">
+    <div class="bg-white rounded-[35px] sm:rounded-[45px] shadow-2xl overflow-hidden relative uniform-modal-container">
       <div class="bg-slate-900 text-white px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between relative shrink-0">
         <div class="flex items-center gap-3">
           <div id="indModalIcon" class="w-10 h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center text-base font-black shadow-md"><i class="fa-solid fa-folder-open"></i></div>
@@ -438,7 +343,6 @@
     </div>
   </div>
 
-  <!-- 獨立彈出「檢視詳細職掌」的通用 Modal -->
   <div id="unitModal" class="fixed inset-0 z-[160] flex items-center justify-center p-4 sm:p-6 bg-slate-900/70 backdrop-blur-md hidden">
     <div class="bg-white rounded-[32px] sm:rounded-[40px] w-full max-w-lg shadow-2xl overflow-hidden relative p-6 sm:p-8">
       <button onclick="closeUnitModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-all"><i class="fa-solid fa-xmark"></i></button>
@@ -457,7 +361,6 @@
     </div>
   </div>
 
-  <!-- 底部 (支持我們的力量) -->
   <footer class="py-12 bg-slate-50 border-t border-slate-100">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
       <div>
@@ -485,12 +388,10 @@
     </div>
   </footer>
 
-  <!-- TOP 浮動按鈕 -->
   <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 sm:w-14 sm:h-14 bg-indigo-600 text-white rounded-2xl shadow-2xl flex items-center justify-center opacity-0 translate-y-10 transition-all z-[100] pointer-events-none hover:bg-indigo-700">
     <i class="fa-solid fa-chevron-up text-lg sm:text-xl"></i>
   </button>
 
-  <!-- 後台管理選單 Modal -->
   <div id="adminMenuModal" class="fixed inset-0 z-[140] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white rounded-[35px] sm:rounded-[40px] w-full max-w-md shadow-2xl p-6 sm:p-8 text-center relative">
       <button onclick="closeAdminMenuModal()" class="absolute top-5 right-5 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
@@ -499,18 +400,17 @@
       <div class="grid grid-cols-1 gap-3 sm:gap-4 mb-4">
         <button onclick="openPublishAuthModal()" class="p-4 rounded-3xl bg-indigo-50 hover:bg-indigo-100 border text-indigo-900 flex items-center gap-4 text-left font-black">
           <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-indigo-600 text-white flex items-center justify-center text-lg sm:text-xl shrink-0"><i class="fa-solid fa-plus"></i></div>
-          <div><h4 class="text-sm sm:text-base">新增消息 / 榮譽</h4><p class="text-xs text-slate-500 font-medium">發布最新公告或榮譽榜</p></div>
+          <div><h4 class="text-sm sm:text-base">新增消息 / 榮譽榜</h4><p class="text-xs text-slate-500 font-medium">發布最新公告或榮譽榜</p></div>
         </button>
         <button onclick="openHistoryAuthModal()" class="p-4 rounded-3xl bg-slate-50 hover:bg-indigo-100 border text-slate-800 flex items-center gap-4 text-left font-black">
           <div class="w-10 h-10 sm:w-12 sm:h-12 rounded-2xl bg-slate-800 text-white flex items-center justify-center text-lg sm:text-xl shrink-0"><i class="fa-solid fa-list-check"></i></div>
-          <div><h4 class="text-sm sm:text-base">管理消息 / 榮譽</h4><p class="text-xs text-slate-500 font-medium">修改或刪除公告與榮譽榜</p></div>
+          <div><h4 class="text-sm sm:text-base">管理消息 / 榮譽榜</h4><p class="text-xs text-slate-500 font-medium">修改或刪除公告與榮譽榜</p></div>
         </button>
       </div>
       <button onclick="closeAdminMenuModal()" class="w-full py-3.5 rounded-2xl bg-slate-100 text-slate-600 font-black text-sm uppercase">關閉選單</button>
     </div>
   </div>
 
-  <!-- 密碼驗證 Modal -->
   <div id="publishAuthModal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white rounded-[35px] sm:rounded-[40px] w-full max-w-sm shadow-2xl p-6 sm:p-8 text-center">
       <h3 class="text-lg sm:text-xl font-black text-slate-800 mb-2">請輸入管理密碼</h3>
@@ -529,15 +429,14 @@
     </div>
   </div>
 
-  <!-- 管理歷史消息與榮譽榜 Modal -->
   <div id="historyModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
-    <div class="bg-white rounded-[35px] sm:rounded-[40px] w-full max-w-2xl shadow-2xl p-6 sm:p-8 max-h-[90vh] overflow-y-auto custom-scrollbar">
-      <div class="flex justify-between items-center mb-6">
+    <div class="bg-white rounded-[35px] sm:rounded-[40px] shadow-2xl p-6 sm:p-8 uniform-modal-container">
+      <div class="flex justify-between items-center mb-6 shrink-0">
         <h3 class="text-xl sm:text-2xl font-black text-slate-800">內容管理列表 (最新消息 / 榮譽榜)</h3>
         <button onclick="closeHistoryModal()" class="w-8 h-8 rounded-full bg-slate-100"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div class="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3">
+      <div class="mb-4 flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 shrink-0">
         <div class="flex gap-2">
           <button onclick="switchAdminTab('notice')" id="adminTabNoticeBtn" class="px-4 py-2 rounded-xl bg-indigo-600 text-white font-black text-xs">最新消息管理</button>
           <button onclick="switchAdminTab('honor')" id="adminTabHonorBtn" class="px-4 py-2 rounded-xl bg-slate-100 text-slate-600 font-black text-xs">榮譽榜管理</button>
@@ -552,20 +451,21 @@
         </div>
       </div>
 
-      <div class="space-y-4" id="historyListContainer"></div>
+      <div class="space-y-4 overflow-y-auto custom-scrollbar flex-grow" id="historyListContainer"></div>
     </div>
   </div>
 
-  <!-- 新增/修改發布表單 Modal -->
   <div id="publishModal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
-    <div class="bg-white rounded-[35px] sm:rounded-[40px] w-full max-w-3xl shadow-2xl p-6 sm:p-8 relative max-h-[90vh] overflow-y-auto custom-scrollbar">
-      <button onclick="closePublishModal()" class="absolute top-5 right-5 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
-      <h3 id="publishModalTitle" class="text-xl sm:text-2xl font-black text-slate-800 mb-6 flex items-center gap-3">
-        <i class="fa-solid fa-pen-to-square text-indigo-600"></i> 新增發布內容
-      </h3>
-      <form id="publishForm" onsubmit="handlePublishSubmit(event)" class="space-y-4 text-left">
+    <div class="bg-white rounded-[35px] sm:rounded-[40px] shadow-2xl p-6 sm:p-8 relative uniform-modal-container">
+      <div class="flex justify-between items-center mb-6 shrink-0">
+        <h3 id="publishModalTitle" class="text-xl sm:text-2xl font-black text-slate-800 flex items-center gap-3">
+          <i class="fa-solid fa-pen-to-square text-indigo-600"></i> 新增發布內容
+        </h3>
+        <button onclick="closePublishModal()" class="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <form id="publishForm" onsubmit="handlePublishSubmit(event)" class="space-y-4 text-left overflow-y-auto custom-scrollbar flex-grow pr-2">
         <input type="hidden" id="editNoticeId" value="">
-        <input type="hidden" id="editDataType" value="notice">
         
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
           <div>
@@ -595,14 +495,13 @@
           <input type="file" id="pubFiles" multiple class="w-full text-xs font-bold text-slate-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-black file:bg-indigo-50 file:text-indigo-600 hover:file:bg-indigo-100 cursor-pointer">
         </div>
 
-        <button type="submit" id="pubSubmitBtn" class="w-full py-4 rounded-2xl bg-indigo-600 text-white font-black uppercase shadow-md text-sm">立即發布</button>
+        <button type="submit" id="pubSubmitBtn" class="w-full py-4 rounded-2xl bg-indigo-600 text-white font-black uppercase shadow-md text-sm mt-4">立即發布</button>
       </form>
     </div>
   </div>
 
-  <!-- 詳細內容 Modal -->
   <div id="noticeDetailModal" class="fixed inset-0 z-[160] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
-    <div class="bg-white rounded-[28px] sm:rounded-[32px] w-full max-w-4xl shadow-2xl overflow-hidden relative max-h-[90vh] flex flex-col custom-scrollbar">
+    <div class="bg-white rounded-[28px] sm:rounded-[32px] shadow-2xl overflow-hidden relative uniform-modal-container">
       <div class="bg-slate-900 text-white px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between relative shrink-0">
         <div class="flex items-center gap-3">
           <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-indigo-500 text-white flex items-center justify-center text-sm font-black shadow-md"><i class="fa-solid fa-shield-heart"></i></div>
@@ -614,7 +513,7 @@
         <button onclick="closeNoticeModal()" class="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-all"><i class="fa-solid fa-xmark"></i></button>
       </div>
 
-      <div class="p-6 sm:p-8 overflow-y-auto custom-scrollbar space-y-6">
+      <div class="p-6 sm:p-8 overflow-y-auto custom-scrollbar space-y-6 flex-grow">
         <div class="flex flex-wrap items-center gap-3 border-b border-slate-100 pb-4">
           <span id="noticeTag" class="text-xs font-black px-4 py-1.5 rounded-full uppercase">--</span>
           <div class="flex items-center gap-1.5 text-xs font-bold text-slate-400">
@@ -648,13 +547,14 @@
           <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-2"><i class="fa-solid fa-paperclip mr-1"></i> 檔案下載</span>
           <div id="noticeFileContent" class="space-y-2"></div>
         </div>
+      </div>
 
-        <button onclick="closeNoticeModal()" class="w-full py-4 rounded-2xl bg-slate-800 text-white font-black uppercase text-sm">關閉視窗</button>
+      <div class="p-4 sm:p-6 bg-white border-t border-slate-100 shrink-0 text-center">
+        <button onclick="closeNoticeModal()" class="w-full py-3.5 rounded-2xl bg-slate-800 text-white font-black uppercase text-sm shadow-md">關閉視窗</button>
       </div>
     </div>
   </div>
 
-  <!-- 圖片放大檢視 Lightbox Modal -->
   <div id="imageLightboxModal" class="fixed inset-0 z-[170] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md hidden" onclick="closeImageLightbox()">
     <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center w-full h-full" onclick="event.stopPropagation()">
       <button onclick="closeImageLightbox()" class="absolute top-4 right-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-xl transition-all shadow-lg"><i class="fa-solid fa-xmark"></i></button>
@@ -775,8 +675,7 @@
         { name: "呂陳英妹", role: "主管 (家庭長)", desc: "團隊最高決策與核心目標，負責行政之最終審核。", icon: "fa-crown text-amber-500" },
         { name: "呂佳寯", role: "營務官", desc: "負責單位總務、行政、政戰事務。", icon: "fa-user-clock text-slate-400" },
         { name: "吉米的爸爸", role: "營產官", desc: "負責單位營產改善、管理。", icon: "fa-screwdriver-wrench text-blue-600" },
-	{ name: "呂佳芯", role: "美工官", desc: "負責單位主視覺設計、美編與攝影紀實。", icon: "fa-palette text-purple-600" },
-
+        { name: "呂佳芯", role: "美工官", desc: "負責單位主視覺設計、美編與攝影紀實。", icon: "fa-palette text-purple-600" },
         { name: "分支長", role: "分支長", desc: "負責管理及督導所屬駐地各項分支單位運作。", icon: "fa-location-crosshairs text-orange-600" }
       ]
     };
@@ -889,7 +788,7 @@
           currentKeys.forEach(id => {
             const item = noticeData[id];
             html += `
-              <div onclick="openNoticeModal('${id}')" class="p-5 rounded-3xl bg-white border border-slate-100 shadow-sm cursor-pointer hover:shadow-md transition-all">
+              <div onclick="openNoticeModal('${id}', false)" class="p-5 rounded-3xl bg-white border border-slate-100 shadow-sm cursor-pointer hover:shadow-md transition-all">
                 <div class="flex justify-between items-center mb-2">
                   <span class="px-3 py-1 rounded-full bg-orange-100 text-orange-600 text-[10px] font-black uppercase">${item.tag}</span>
                   <span class="text-xs font-bold text-slate-400 italic">${formatDate(item.date)}</span>
@@ -948,6 +847,57 @@
             paginationEl.appendChild(btn);
           }
         }
+
+      } else if (type === 'activities') {
+        titleEl.innerText = "年度活動行銷月曆";
+        iconEl.innerHTML = '<i class="fa-solid fa-calendar-star text-white"></i>';
+        bodyEl.innerHTML = `
+          <div class="space-y-6">
+            <div class="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 bg-gradient-to-r from-sky-50 to-blue-50 p-6 rounded-3xl border border-sky-100">
+              <div>
+                <span class="text-xs font-black text-sky-700 bg-amber-300/80 px-3 py-1 rounded-full uppercase">Q1 - Q4 計劃</span>
+                <h3 class="text-2xl font-black text-slate-900 mt-2">家庭年度活動行事曆</h3>
+                <p class="text-slate-500 text-sm font-medium mt-1">提早準備各項家族歡聚時刻與節慶慶祝行程！</p>
+              </div>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+              <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 text-center flex flex-col items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-red-50 text-red-500 flex items-center justify-center text-2xl mb-3 shadow-inner"><i class="fa-solid fa-utensils"></i></div>
+                <span class="px-3 py-1 rounded-full bg-red-500 text-white text-[10px] font-black uppercase mb-1">1 月份</span>
+                <h4 class="text-lg font-black text-slate-900 mb-1">新年圍爐團聚</h4>
+                <p class="text-xs text-slate-400 font-bold">家族團圓迎新春</p>
+              </div>
+
+              <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 text-center flex flex-col items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-pink-50 text-pink-500 flex items-center justify-center text-2xl mb-3 shadow-inner"><i class="fa-solid fa-cake-candles"></i></div>
+                <span class="px-3 py-1 rounded-full bg-pink-500 text-white text-[10px] font-black uppercase mb-1">5 月份</span>
+                <h4 class="text-lg font-black text-slate-900 mb-1">母親節慶祝</h4>
+                <p class="text-xs text-slate-400 font-bold">感恩母愛溫馨獻禮</p>
+              </div>
+
+              <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 text-center flex flex-col items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-blue-50 text-blue-500 flex items-center justify-center text-2xl mb-3 shadow-inner"><i class="fa-solid fa-medal"></i></div>
+                <span class="px-3 py-1 rounded-full bg-blue-500 text-white text-[10px] font-black uppercase mb-1">8 月份</span>
+                <h4 class="text-lg font-black text-slate-900 mb-1">父親節慶祝</h4>
+                <p class="text-xs text-slate-400 font-bold">致敬父親辛勞付出</p>
+              </div>
+
+              <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 text-center flex flex-col items-center justify-center">
+                <div class="w-16 h-16 rounded-full bg-amber-50 text-amber-600 flex items-center justify-center text-2xl mb-3 shadow-inner"><i class="fa-solid fa-fire-burner"></i></div>
+                <span class="px-3 py-1 rounded-full bg-amber-500 text-white text-[10px] font-black uppercase mb-1">9 月份</span>
+                <h4 class="text-lg font-black text-slate-900 mb-1">中秋烤肉慶祝</h4>
+                <p class="text-xs text-slate-400 font-bold">月圓人團圓烤肉趣</p>
+              </div>
+
+              <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 text-center flex flex-col items-center justify-center sm:col-span-2 md:col-span-2">
+                <div class="w-16 h-16 rounded-full bg-emerald-50 text-emerald-600 flex items-center justify-center text-2xl mb-3 shadow-inner"><i class="fa-solid fa-gifts"></i></div>
+                <span class="px-3 py-1 rounded-full bg-emerald-500 text-white text-[10px] font-black uppercase mb-1">12 月份</span>
+                <h4 class="text-lg font-black text-slate-900 mb-1">聖誕節慶祝</h4>
+                <p class="text-xs text-slate-400 font-bold">歡樂交換禮物派對</p>
+              </div>
+            </div>
+          </div>`;
 
       } else if (type === 'team') {
         titleEl.innerText = "隊職幹部介紹";
@@ -1019,7 +969,7 @@
                 <p class="text-xs text-slate-500 font-bold mb-2">設籍人數：3 名</p>
                 <p class="text-slate-600 text-sm font-medium">分支長 * 1、隊員 * 2。</p>
               </div>
-              <div class="p-5 rounded-3xl bg-white border shadow-sm md">
+              <div class="p-5 rounded-3xl bg-white border shadow-sm">
                 <h4 class="font-black text-emerald-600 text-base mb-1">桃園平鎮 (第三分支)</h4>
                 <p class="text-xs text-slate-500 font-bold mb-2">設籍人數：3 名</p>
                 <p class="text-slate-600 text-sm font-medium">分支長 * 1、隊員 * 2。</p>
@@ -1055,7 +1005,7 @@
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂陳英妹', '主管 (家庭長)', '團隊最高決策與核心目標，負責行政之最終審核。')"><h4 class="font-black text-indigo-600 text-lg mb-1">呂陳英妹</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">主管 (家庭長)</p><p class="text-slate-600 text-sm font-medium">團隊最高決策與核心目標，負責行政之最終審核。</p></div>
             <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳寯', '營務官', '負責單位總務、行政、政戰事務。')"><h4 class="font-black text-emerald-600 text-lg mb-1">呂佳寯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">營務官</p><p class="text-slate-600 text-sm font-medium">負責單位總務、行政、政戰事務。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('吉米的爸爸', '營產官', '負責單位營產改善、管理。')"><h4 class="font-black text-blue-600 text-lg mb-1">吉米的爸爸</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">後勤員</p><p class="text-slate-600 text-sm font-medium">負責單位營產改善施工管理與各項硬體維護。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('吉米的爸爸', '營產官', '負責單位營產改善、管理。')"><h4 class="font-black text-blue-600 text-lg mb-1">吉米的爸爸</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">營產官</p><p class="text-slate-600 text-sm font-medium">負責單位營產改善、管理。</p></div>
             <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳芯', '美工官', '負責單位主視覺設計、美編與攝影紀實。')"><h4 class="font-black text-blue-600 text-lg mb-1">呂佳芯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">美工官</p><p class="text-slate-600 text-sm font-medium">負責單位主視覺設計、美編與攝影紀實。</p></div>
             <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('分支長', '分支長', '負責管理及督導所屬駐地各項分支單位運作。')"><h4 class="font-black text-orange-600 text-lg mb-1">分支長</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">分支長</p><p class="text-slate-600 text-sm font-medium">負責管理及督導所屬駐地各項分支單位運作。</p></div>
           </div>`;
@@ -1133,7 +1083,7 @@
           const data = noticeData[id];
           const newItem = document.createElement('div');
           newItem.className = "notice-item bg-white rounded-[28px] overflow-hidden border border-slate-100 shadow-md cursor-pointer hover:shadow-2xl transition-all flex flex-col justify-between shrink-0 w-full sm:w-[280px] snap-start group";
-          newItem.setAttribute('onclick', `openNoticeModal('${id}')`);
+          newItem.setAttribute('onclick', `openNoticeModal('${id}', false)`);
           
           let badgeBg = "bg-orange-500";
           if(data.tag === '重要消息') badgeBg = "bg-red-500";
