@@ -16,12 +16,6 @@
     .gradient-text { background: linear-gradient(to right, #6366f1, #0ea5e9); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     .hover-float { transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
     .hover-float:hover { transform: translateY(-8px); box-shadow: 0 30px 60px rgba(15, 23, 42, 0.15); }
-    /* 卡片浮動與呼吸燈動畫效果 */
-    @keyframes floatingCard {
-      0%, 100% { transform: translateY(0); }
-      50% { transform: translateY(-8px); }
-    }
-    .animate-floating { animation: floatingCard 4s ease-in-out infinite; }
     
     /* 隱藏原生捲動軸但保持滾動功能 */
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -43,6 +37,7 @@
 
 <body class="text-slate-700">
 
+  <!-- 導覽列 -->
   <nav class="bg-white/90 backdrop-blur-md sticky top-0 z-50 border-b border-slate-100">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
       <a href="#home" class="flex items-center gap-3 hover:opacity-80 transition-opacity">
@@ -50,6 +45,7 @@
         <h1 class="font-bold text-base sm:text-lg text-slate-800 truncate">呂氏家庭生活資訊網 3.0</h1>
       </a>
 
+      <!-- 漢堡選單按鈕 -->
       <button onclick="toggleMobileMenu()" class="md:hidden text-2xl text-slate-700 p-2 focus:outline-none">
         <i id="mobileMenuIcon" class="fa-solid fa-bars"></i>
       </button>
@@ -57,6 +53,7 @@
       <div class="hidden md:flex items-center gap-6 text-sm font-bold text-slate-500">
         <a href="#home" class="hover:text-indigo-600 transition-colors">首頁</a>
         
+        <!-- 最新消息下拉選單與超連結 -->
         <div class="relative group">
           <a href="#notice" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-2 focus:outline-none">
             <span>最新消息</span>
@@ -72,6 +69,7 @@
           </div>
         </div>
 
+        <!-- 關於我們下拉選單與超連結 -->
         <div class="relative group">
           <a href="#team-staff" class="flex items-center gap-1.5 hover:text-indigo-600 transition-colors py-2 focus:outline-none">
             <span>關於我們</span>
@@ -93,8 +91,10 @@
           </div>
         </div>
 
+        <!-- 年度活動彈出按鈕 -->
         <button onclick="openIndependentPage('activities')" class="hover:text-indigo-600 transition-colors py-2 font-bold bg-transparent border-0 cursor-pointer">年度活動</button>
 
+        <!-- 聯絡我們連結 -->
         <a href="#contact" class="hover:text-indigo-600 transition-colors py-2 font-bold">聯絡我們</a>
 
         <button onclick="openAdminMenuModal()" class="flex items-center gap-2 px-4 py-2 rounded-xl bg-slate-800 text-white hover:bg-slate-900 transition-all font-black text-sm shadow-md">
@@ -103,6 +103,7 @@
       </div>
     </div>
 
+    <!-- 手機與平板漢堡清單下拉選單內容 -->
     <div id="mobileMenu" class="hidden md:hidden bg-white border-t border-slate-100 px-6 py-6 space-y-4 shadow-xl">
       <a href="#home" onclick="toggleMobileMenu()" class="block font-bold text-slate-700 hover:text-indigo-600 py-1">首頁</a>
       
@@ -149,6 +150,7 @@
     </div>
   </nav>
 
+  <!-- 首頁區 -->
   <section id="home" class="py-12 sm:py-16 flex items-center">
     <div class="max-w-6xl mx-auto px-4 sm:px-6 grid lg:grid-cols-12 gap-8 lg:gap-10 items-center w-full">
       <div data-aos="fade-right" class="text-center lg:text-left lg:col-span-5">
@@ -156,6 +158,7 @@
         <p class="text-slate-500 font-medium mt-4 text-base sm:text-lg">呂氏家庭生活資訊網 3.0，凝聚 13 位成員的溫馨園地。</p>
       </div>
 
+      <!-- 輪播照片區塊 -->
       <div class="relative flex justify-center w-full lg:col-span-7" data-aos="fade-left">
         <div class="glass-card rounded-[30px] sm:rounded-[35px] p-2 sm:p-3 shadow-2xl border-white hover-float overflow-hidden w-full max-w-xl relative group">
           <div class="relative w-full h-[320px] sm:h-[420px] rounded-[24px] sm:rounded-[28px] overflow-hidden bg-white">
@@ -183,9 +186,11 @@
     </div>
   </section>
 
+  <!-- 主要內容區 -->
   <section class="py-8 sm:py-10 bg-slate-50">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 w-full">
       
+      <!-- 最新消息區 -->
       <div id="notice" class="mb-16 scroll-mt-24 pt-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
@@ -222,6 +227,7 @@
         </div>
       </div>
 
+      <!-- 隊職幹部橫向輪播清單區塊 (作為關於我們跳轉目標) -->
       <div id="team-staff" class="mb-16 scroll-mt-24 pt-6">
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
           
@@ -232,6 +238,7 @@
               <div class="w-12 h-1 bg-indigo-600 rounded-full mt-3 mb-6"></div>
             </div>
 
+            <!-- 年度切換按鈕 -->
             <div class="flex flex-col gap-2 pt-2">
               <button onclick="switchHomeTeamYear('25-26')" id="homeBtn2526" class="px-4 py-2.5 rounded-2xl bg-indigo-600 text-white font-black text-xs shadow-md transition-all text-center">25-26 幹部名單</button>
               <button onclick="switchHomeTeamYear('26-27')" id="homeBtn2627" class="px-4 py-2.5 rounded-2xl bg-white text-slate-600 border border-slate-200 font-black text-xs hover:border-indigo-600 transition-all text-center">26-27 幹部名單</button>
@@ -246,7 +253,8 @@
 
           <div class="lg:col-span-9 flex flex-col gap-6">
             <div id="homeTeamListContainer" class="grid grid-flow-col auto-cols-[minmax(280px,1fr)] gap-5 overflow-x-auto pb-4 no-scrollbar snap-x" style="min-height: 320px;">
-              </div>
+              <!-- 動態填入首頁隊職員清單 -->
+            </div>
 
             <div class="flex items-center justify-between gap-6 pt-2">
               <div class="flex-grow bg-slate-200 h-1.5 rounded-full overflow-hidden">
@@ -265,9 +273,11 @@
     </div>
   </section>
 
+  <!-- 聯絡我們區塊 -->
   <section id="contact" class="py-12 bg-[#f8fafc] border-t-0">
     <div class="max-w-5xl mx-auto px-4 sm:px-6">
       
+      <!-- 裝飾標題列 -->
       <div class="text-center mb-10">
         <span class="text-orange-600 font-bold text-sm tracking-wider uppercase block mb-1">聯絡我們</span>
         <h2 class="text-4xl sm:text-5xl font-black text-slate-900 tracking-tight uppercase">CONTACT US</h2>
@@ -275,8 +285,10 @@
       </div>
 
       <div class="space-y-8">
+        <!-- 雙欄設計：將家庭服務與社群放在同一大區塊內並排 -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           
+          <!-- 核心服務 / 聯絡資訊方塊 1 -->
           <div class="bg-white rounded-[32px] p-6 sm:p-8 shadow-xl border border-orange-100 relative overflow-hidden flex flex-col">
             <div class="absolute top-0 left-0 right-0 h-2 bg-orange-600"></div>
             <div class="flex items-center gap-3 mb-4">
@@ -298,6 +310,7 @@
             </div>
           </div>
 
+          <!-- 聯絡社群 / QR Code 方塊 2 -->
           <div class="bg-white rounded-[32px] p-6 sm:p-8 shadow-xl border border-orange-100 relative overflow-hidden flex flex-col">
             <div class="absolute top-0 left-0 right-0 h-2 bg-orange-600"></div>
             <div class="flex items-center gap-3 mb-4">
@@ -321,6 +334,7 @@
     </div>
   </section>
 
+  <!-- 獨立彈出檢視頁面 Modal (使用一致尺寸) -->
   <div id="independentPageModal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-900/70 backdrop-blur-md hidden">
     <div class="bg-white rounded-[35px] sm:rounded-[45px] shadow-2xl overflow-hidden relative uniform-modal-container">
       <div class="bg-slate-900 text-white px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between relative shrink-0">
@@ -343,6 +357,7 @@
     </div>
   </div>
 
+  <!-- 獨立彈出「檢視詳細職掌」的通用 Modal -->
   <div id="unitModal" class="fixed inset-0 z-[160] flex items-center justify-center p-4 sm:p-6 bg-slate-900/70 backdrop-blur-md hidden">
     <div class="bg-white rounded-[32px] sm:rounded-[40px] w-full max-w-lg shadow-2xl overflow-hidden relative p-6 sm:p-8">
       <button onclick="closeUnitModal()" class="absolute top-5 right-5 w-9 h-9 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-700 flex items-center justify-center transition-all"><i class="fa-solid fa-xmark"></i></button>
@@ -361,6 +376,7 @@
     </div>
   </div>
 
+  <!-- 底部 (支持我們的力量) -->
   <footer class="py-12 bg-slate-50 border-t border-slate-100">
     <div class="max-w-4xl mx-auto px-4 sm:px-6 space-y-12">
       <div>
@@ -388,10 +404,12 @@
     </div>
   </footer>
 
+  <!-- TOP 浮動按鈕 -->
   <button id="backToTop" class="fixed bottom-6 right-6 w-12 h-12 sm:w-14 sm:h-14 bg-indigo-600 text-white rounded-2xl shadow-2xl flex items-center justify-center opacity-0 translate-y-10 transition-all z-[100] pointer-events-none hover:bg-indigo-700">
     <i class="fa-solid fa-chevron-up text-lg sm:text-xl"></i>
   </button>
 
+  <!-- 後台管理選單 Modal -->
   <div id="adminMenuModal" class="fixed inset-0 z-[140] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white rounded-[35px] sm:rounded-[40px] w-full max-w-md shadow-2xl p-6 sm:p-8 text-center relative">
       <button onclick="closeAdminMenuModal()" class="absolute top-5 right-5 w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-slate-100 flex items-center justify-center"><i class="fa-solid fa-xmark"></i></button>
@@ -411,6 +429,7 @@
     </div>
   </div>
 
+  <!-- 密碼驗證 Modal -->
   <div id="publishAuthModal" class="fixed inset-0 z-[150] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white rounded-[35px] sm:rounded-[40px] w-full max-w-sm shadow-2xl p-6 sm:p-8 text-center">
       <h3 class="text-lg sm:text-xl font-black text-slate-800 mb-2">請輸入管理密碼</h3>
@@ -429,6 +448,7 @@
     </div>
   </div>
 
+  <!-- 管理歷史訊息與榮譽榜 Modal (使用一致尺寸) -->
   <div id="historyModal" class="fixed inset-0 z-[100] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white rounded-[35px] sm:rounded-[40px] shadow-2xl p-6 sm:p-8 uniform-modal-container">
       <div class="flex justify-between items-center mb-6 shrink-0">
@@ -455,6 +475,7 @@
     </div>
   </div>
 
+  <!-- 新增/修改發布表單 Modal (使用一致尺寸) -->
   <div id="publishModal" class="fixed inset-0 z-[120] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white rounded-[35px] sm:rounded-[40px] shadow-2xl p-6 sm:p-8 relative uniform-modal-container">
       <div class="flex justify-between items-center mb-6 shrink-0">
@@ -500,6 +521,7 @@
     </div>
   </div>
 
+  <!-- 詳細內容 Modal (使用一致尺寸) -->
   <div id="noticeDetailModal" class="fixed inset-0 z-[160] flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-sm hidden">
     <div class="bg-white rounded-[28px] sm:rounded-[32px] shadow-2xl overflow-hidden relative uniform-modal-container">
       <div class="bg-slate-900 text-white px-6 sm:px-8 py-5 sm:py-6 flex items-center justify-between relative shrink-0">
@@ -555,6 +577,7 @@
     </div>
   </div>
 
+  <!-- 圖片放大檢視 Lightbox Modal -->
   <div id="imageLightboxModal" class="fixed inset-0 z-[170] flex items-center justify-center p-4 bg-slate-950/90 backdrop-blur-md hidden" onclick="closeImageLightbox()">
     <div class="relative max-w-5xl max-h-[90vh] flex items-center justify-center w-full h-full" onclick="event.stopPropagation()">
       <button onclick="closeImageLightbox()" class="absolute top-4 right-4 z-20 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-xl transition-all shadow-lg"><i class="fa-solid fa-xmark"></i></button>
@@ -628,6 +651,12 @@
     function openOrgChartLightbox() {
       const imgSrc = document.getElementById('orgChartImg')?.src || '';
       window._currentNoticeImages = [{ url: imgSrc, name: '組織架構圖' }];
+      openImageLightbox(0);
+    }
+
+    function openRoleChartLightbox() {
+      const imgSrc = document.getElementById('roleChartImg')?.src || '';
+      window._currentNoticeImages = [{ url: imgSrc, name: '業務職掌圖' }];
       openImageLightbox(0);
     }
 
@@ -861,6 +890,7 @@
               </div>
             </div>
 
+            <!-- 活動圓形卡片清單排版 -->
             <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
               <div class="bg-white rounded-3xl p-6 shadow-md border border-slate-100 text-center flex flex-col items-center justify-center">
                 <div class="w-16 h-16 rounded-full bg-red-50 text-red-500 flex items-center justify-center text-2xl mb-3 shadow-inner"><i class="fa-solid fa-utensils"></i></div>
@@ -933,18 +963,9 @@
         titleEl.innerText = "業務職掌";
         iconEl.innerHTML = '<i class="fa-solid fa-briefcase text-white"></i>';
         bodyEl.innerHTML = `
-          <div class="space-y-6">
-            <h3 class="text-xl font-black text-slate-800">業務職掌</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div class="p-6 rounded-3xl bg-indigo-50 border border-indigo-100">
-                <h4 class="text-lg font-black text-indigo-900 mb-3">行政核心</h4>
-                <p class="text-indigo-800 text-sm font-medium leading-relaxed">• 家庭長 : 掌管最高決策與核心目標。<br>• 營務官 : 負責單位總務、行政、政戰事務。</p>
-              </div>
-              <div class="p-6 rounded-3xl bg-white border border-slate-200">
-                <h4 class="text-lg font-black text-slate-800 mb-3">執行幕僚</h4>
-                <p class="text-slate-600 text-sm font-medium leading-relaxed">• 營產官 : 負責營產改善施工管理。<br>• 分支長 : 負責管理及督導所屬駐地單位。</p>
-              </div>
-            </div>
+          <div class="space-y-4 text-center cursor-pointer" onclick="openRoleChartLightbox()">
+            <h3 class="text-xl font-black text-slate-800 mb-2">業務職掌圖表 (點擊圖片放大)</h3>
+            <img id="roleChartImg" src="業務職掌圖.png" alt="業務職掌圖" class="w-full rounded-2xl shadow-md border bg-white object-contain mx-auto hover:opacity-95 transition-opacity">
           </div>`;
 
       } else if (type === 'unit') {
