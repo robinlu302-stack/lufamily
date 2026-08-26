@@ -364,12 +364,12 @@
       <div class="flex items-center gap-3 mb-4">
         <div id="unitModalIcon" class="w-12 h-12 rounded-2xl bg-indigo-50 text-indigo-600 flex items-center justify-center text-2xl"><i class="fa-solid fa-user-shield"></i></div>
         <div>
-          <span id="unitModalRole" class="text-xs font-black text-indigo-600 uppercase tracking-widest block">職稱</span>
-          <h3 id="unitModalName" class="text-xl sm:text-2xl font-black text-slate-900">姓名</h3>
+          <span class="text-xs font-black text-indigo-600 uppercase tracking-widest block">職務詳細說明</span>
+          <h3 id="unitModalRole" class="text-xl sm:text-2xl font-black text-slate-900">職稱</h3>
         </div>
       </div>
       <div class="bg-slate-50 rounded-2xl p-5 border border-slate-100 mb-6">
-        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">職掌與工作說明</span>
+        <span class="text-[10px] font-black text-slate-400 uppercase tracking-widest block mb-1">工作職掌內容</span>
         <p id="unitModalDesc" class="text-slate-700 font-medium text-sm sm:text-base leading-relaxed">內容...</p>
       </div>
       <button onclick="closeUnitModal()" class="w-full py-3.5 rounded-2xl bg-slate-800 hover:bg-slate-900 text-white font-black uppercase text-sm shadow-md transition-all">關閉視窗</button>
@@ -690,22 +690,22 @@
     let honorData = {};
     let currentAdminTab = 'notice';
 
-    // 隊職幹部資料 (25-26 及 26-27)
+    // 隊職幹部資料 (25-26 及 26-27，拿掉姓名，直接放大職稱)
     const teamStaffData = {
       "25-26": [
-        { name: "呂陳英妹", role: "主管 (家庭長)", desc: "團隊最高決策與核心目標，負責行政之最終審核。", icon: "fa-crown text-amber-500" },
-        { name: "呂佳寯", role: "政戰主管 (25-26)", desc: "負責內部的溝通協調、程序督導、士氣維護及新聞公關。", icon: "fa-shield-halved text-indigo-600" },
-        { name: "懸缺", role: "參事 (25-26)", desc: "負責單位內部各項行政庶務與相關程序協辦。", icon: "fa-user-clock text-slate-400" },
-        { name: "吉米的爸爸", role: "後勤員", desc: "負責單位營產改善施工管理與各項硬體維護。", icon: "fa-screwdriver-wrench text-blue-600" },
-        { name: "呂佳芯", role: "美術員 (25-26)", desc: "專責單位內部視覺形象設計與各項美感規劃。", icon: "fa-palette text-purple-600" },
-        { name: "分支長", role: "分支長", desc: "負責管理及督導所屬駐地各項分支單位運作。", icon: "fa-location-crosshairs text-orange-600" }
+        { role: "主管 (家庭長)", desc: "團隊最高決策與核心目標，負責行政之最終審核。", icon: "fa-crown text-amber-500" },
+        { role: "政戰主管 (25-26)", desc: "負責內部的溝通協調、程序督導、士氣維護及新聞公關。", icon: "fa-shield-halved text-indigo-600" },
+        { role: "參事 (25-26)", desc: "負責單位內部各項行政庶務與相關程序協辦。", icon: "fa-user-clock text-slate-400" },
+        { role: "後勤員", desc: "負責單位營產改善施工管理與各項硬體維護。", icon: "fa-screwdriver-wrench text-blue-600" },
+        { role: "美術員 (25-26)", desc: "專責單位內部視覺形象設計與各項美感規劃。", icon: "fa-palette text-purple-600" },
+        { role: "分支長", desc: "負責管理及督導所屬駐地各項分支單位運作。", icon: "fa-location-crosshairs text-orange-600" }
       ],
       "26-27": [
-        { name: "呂陳英妹", role: "主管 (家庭長)", desc: "團隊最高決策與核心目標，負責行政之最終審核。", icon: "fa-crown text-amber-500" },
-        { name: "呂佳寯", role: "營務官", desc: "負責單位總務、行政、政戰事務。", icon: "fa-user-clock text-slate-400" },
-        { name: "吉米的爸爸", role: "營產官", desc: "負責單位營產改善、管理。", icon: "fa-screwdriver-wrench text-blue-600" },
-        { name: "呂佳芯", role: "美工官", desc: "負責單位主視覺設計、美編與攝影紀實。", icon: "fa-palette text-purple-600" },
-        { name: "分支長", role: "分支長", desc: "負責管理及督導所屬駐地各項分支單位運作。", icon: "fa-location-crosshairs text-orange-600" }
+        { role: "主管 (家庭長)", desc: "團隊最高決策與核心目標，負責行政之最終審核。", icon: "fa-crown text-amber-500" },
+        { role: "營務官", desc: "負責單位總務、行政、政戰事務。", icon: "fa-user-clock text-slate-400" },
+        { role: "營產官", desc: "負責單位營產改善、管理。", icon: "fa-screwdriver-wrench text-blue-600" },
+        { role: "美工官", desc: "負責單位主視覺設計、美編與攝影紀實。", icon: "fa-palette text-purple-600" },
+        { role: "分支長", desc: "負責管理及督導所屬駐地各項分支單位運作。", icon: "fa-location-crosshairs text-orange-600" }
       ]
     };
 
@@ -718,15 +718,14 @@
       list.forEach(member => {
         const item = document.createElement('div');
         item.className = "bg-white rounded-[28px] overflow-hidden border border-slate-100 shadow-md cursor-pointer hover:shadow-2xl transition-all flex flex-col justify-between shrink-0 w-full sm:w-[280px] snap-start group p-6";
-        item.setAttribute('onclick', `openTeamMemberModal('${member.name}', '${member.role}', '${member.desc}')`);
+        item.setAttribute('onclick', `openTeamMemberModal('${member.role}', '${member.desc}')`);
         
         item.innerHTML = `
           <div class="relative w-full h-32 sm:h-36 rounded-2xl bg-slate-50 flex items-center justify-center mb-4">
             <i class="fa-solid ${member.icon} text-4xl sm:text-5xl group-hover:scale-110 transition-transform"></i>
           </div>
           <div>
-            <span class="text-xs font-bold text-indigo-600 uppercase tracking-widest block mb-1.5">${member.role}</span>
-            <h3 class="text-lg sm:text-xl font-black text-slate-900 truncate">${member.name}</h3>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 truncate">${member.role}</h3>
           </div>
           <div class="pt-4 mt-4 border-t border-slate-100 flex items-center justify-between text-xs font-bold text-slate-400 group-hover:text-indigo-600 transition-colors">
             <span>檢視詳細職掌</span>
@@ -777,8 +776,7 @@
 
     document.getElementById('homeTeamListContainer')?.addEventListener('scroll', updateTeamProgress);
 
-    function openTeamMemberModal(name, role, desc) {
-      document.getElementById('unitModalName').innerText = name;
+    function openTeamMemberModal(role, desc) {
       document.getElementById('unitModalRole').innerText = role;
       document.getElementById('unitModalDesc').innerText = desc;
       document.getElementById('unitModal').classList.remove('hidden');
@@ -940,12 +938,12 @@
             </div>
             <div id="modalTeamContentContainer">
               <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂陳英妹', '主管 (家庭長)', '團隊最高決策與核心目標，負責行政之最終審核。')"><h4 class="font-black text-indigo-600 text-lg mb-1">呂陳英妹</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">主管 (家庭長)</p><p class="text-slate-600 text-sm font-medium">團隊最高決策與核心目標，負責行政之最終審核。</p></div>
-                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳寯', '政戰主管 (25-26)', '負責內部的溝通協調、督導、士氣維護及新聞公關。')"><h4 class="font-black text-emerald-600 text-lg mb-1">呂佳寯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">政戰主管 (25-26)</p><p class="text-slate-600 text-sm font-medium">負責內部的溝通協調、督導、士氣維護及新聞公關。</p></div>
-                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('懸缺', '參事 (25-26)', '負責單位內部各項行政庶務與相關程序協辦。')"><h4 class="font-black text-amber-600 text-lg mb-1">懸缺</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">參事 (25-26)</p><p class="text-slate-600 text-sm font-medium">負責單位內部各項行政庶務與相關程序協辦。</p></div>
-                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('吉米的爸爸', '後勤員', '負責單位營產改善施工管理與各項硬體維護。')"><h4 class="font-black text-blue-600 text-lg mb-1">吉米的爸爸</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">後勤員</p><p class="text-slate-600 text-sm font-medium">負責單位營產改善施工管理與各項硬體維護。</p></div>
-                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳芯', '美術員 (25-26)', '專責單位內部視覺形象設計與各項美感規劃。')"><h4 class="font-black text-purple-600 text-lg mb-1">呂佳芯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">美術員 (25-26)</p><p class="text-slate-600 text-sm font-medium">專責單位內部視覺形象設計與各項美感規劃。</p></div>
-                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('分支長', '分支長', '負責管理及督導所屬駐地各項分支單位運作。')"><h4 class="font-black text-orange-600 text-lg mb-1">分支長</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">分支長</p><p class="text-slate-600 text-sm font-medium">負責管理及督導所屬駐地各項分支單位運作。</p></div>
+                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('主管 (家庭長)', '團隊最高決策與核心目標，負責行政之最終審核。')"><h4 class="font-black text-indigo-600 text-lg sm:text-xl mb-1">主管 (家庭長)</h4><p class="text-slate-600 text-sm font-medium">團隊最高決策與核心目標，負責行政之最終審核。</p></div>
+                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('政戰主管 (25-26)', '負責內部的溝通協調、督導、士氣維護及新聞公關。')"><h4 class="font-black text-emerald-600 text-lg sm:text-xl mb-1">政戰主管 (25-26)</h4><p class="text-slate-600 text-sm font-medium">負責內部的溝通協調、督導、士氣維護及新聞公關。</p></div>
+                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('參事 (25-26)', '負責單位內部各項行政庶務與相關程序協辦。')"><h4 class="font-black text-amber-600 text-lg sm:text-xl mb-1">參事 (25-26)</h4><p class="text-slate-600 text-sm font-medium">負責單位內部各項行政庶務與相關程序協辦。</p></div>
+                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('後勤員', '負責單位營產改善施工管理與各項硬體維護。')"><h4 class="font-black text-blue-600 text-lg sm:text-xl mb-1">後勤員</h4><p class="text-slate-600 text-sm font-medium">負責單位營產改善施工管理與各項硬體維護。</p></div>
+                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('美術員 (25-26)', '專責單位內部視覺形象設計與各項美感規劃。')"><h4 class="font-black text-purple-600 text-lg sm:text-xl mb-1">美術員 (25-26)</h4><p class="text-slate-600 text-sm font-medium">專責單位內部視覺形象設計與各項美感規劃。</p></div>
+                <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('分支長', '負責管理及督導所屬駐地各項分支單位運作。')"><h4 class="font-black text-orange-600 text-lg sm:text-xl mb-1">分支長</h4><p class="text-slate-600 text-sm font-medium">負責管理及督導所屬駐地各項分支單位運作。</p></div>
               </div>
             </div>
           </div>`;
@@ -1012,23 +1010,23 @@
         b26.className = "px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 font-black text-xs hover:border-indigo-600 transition-all";
         container.innerHTML = `
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂陳英妹', '主管 (家庭長)', '團隊最高決策與核心目標，負責行政之最終審核。')"><h4 class="font-black text-indigo-600 text-lg mb-1">呂陳英妹</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">主管 (家庭長)</p><p class="text-slate-600 text-sm font-medium">團隊最高決策與核心目標，負責行政之最終審核。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳寯', '政戰主管 (25-26)', '負責內部的溝通協調、督導、士氣維護及新聞公關。')"><h4 class="font-black text-emerald-600 text-lg mb-1">呂佳寯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">政戰主管 (25-26)</p><p class="text-slate-600 text-sm font-medium">負責內部的溝通協調、督導、士氣維護及新聞公關。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('懸缺', '參事 (25-26)', '負責單位內部各項行政庶務與相關程序協辦。')"><h4 class="font-black text-amber-600 text-lg mb-1">懸缺</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">參事 (25-26)</p><p class="text-slate-600 text-sm font-medium">負責單位內部各項行政庶務與相關程序協辦。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('吉米的爸爸', '後勤員', '負責單位營產改善施工管理與各項硬體維護。')"><h4 class="font-black text-blue-600 text-lg mb-1">吉米的爸爸</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">後勤員</p><p class="text-slate-600 text-sm font-medium">負責單位營產改善施工管理與各項硬體維護。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳芯', '美術員 (25-26)', '專責單位內部視覺形象設計與各項美感規劃。')"><h4 class="font-black text-purple-600 text-lg mb-1">呂佳芯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">美術員 (25-26)</p><p class="text-slate-600 text-sm font-medium">專責單位內部視覺形象設計與各項美感規劃。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('分支長', '分支長', '負責管理及督導所屬駐地各項分支單位運作。')"><h4 class="font-black text-orange-600 text-lg mb-1">分支長</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">分支長</p><p class="text-slate-600 text-sm font-medium">負責管理及督導所屬駐地各項分支單位運作。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('主管 (家庭長)', '團隊最高決策與核心目標，負責行政之最終審核。')"><h4 class="font-black text-indigo-600 text-lg sm:text-xl mb-1">主管 (家庭長)</h4><p class="text-slate-600 text-sm font-medium">團隊最高決策與核心目標，負責行政之最終審核。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('政戰主管 (25-26)', '負責內部的溝通協調、督導、士氣維護及新聞公關。')"><h4 class="font-black text-emerald-600 text-lg sm:text-xl mb-1">政戰主管 (25-26)</h4><p class="text-slate-600 text-sm font-medium">負責內部的溝通協調、督導、士氣維護及新聞公關。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('參事 (25-26)', '負責單位內部各項行政庶務與相關程序協辦。')"><h4 class="font-black text-amber-600 text-lg sm:text-xl mb-1">參事 (25-26)</h4><p class="text-slate-600 text-sm font-medium">負責單位內部各項行政庶務與相關程序協辦。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('後勤員', '負責單位營產改善施工管理與各項硬體維護。')"><h4 class="font-black text-blue-600 text-lg sm:text-xl mb-1">後勤員</h4><p class="text-slate-600 text-sm font-medium">負責單位營產改善施工管理與各項硬體維護。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('美術員 (25-26)', '專責單位內部視覺形象設計與各項美感規劃。')"><h4 class="font-black text-purple-600 text-lg sm:text-xl mb-1">美術員 (25-26)</h4><p class="text-slate-600 text-sm font-medium">專責單位內部視覺形象設計與各項美感規劃。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('分支長', '負責管理及督導所屬駐地各項分支單位運作。')"><h4 class="font-black text-orange-600 text-lg sm:text-xl mb-1">分支長</h4><p class="text-slate-600 text-sm font-medium">負責管理及督導所屬駐地各項分支單位運作。</p></div>
           </div>`;
       } else {
         b26.className = "px-4 py-2 rounded-full bg-indigo-600 text-white font-black text-xs shadow-md transition-all";
         b25.className = "px-4 py-2 rounded-full bg-white text-slate-600 border border-slate-200 font-black text-xs hover:border-indigo-600 transition-all";
         container.innerHTML = `
           <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂陳英妹', '主管 (家庭長)', '團隊最高決策與核心目標，負責行政之最終審核。')"><h4 class="font-black text-indigo-600 text-lg mb-1">呂陳英妹</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">主管 (家庭長)</p><p class="text-slate-600 text-sm font-medium">團隊最高決策與核心目標，負責行政之最終審核。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳寯', '營務官', '負責單位總務、行政、政戰事務。')"><h4 class="font-black text-emerald-600 text-lg mb-1">呂佳寯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">營務官</p><p class="text-slate-600 text-sm font-medium">負責單位總務、行政、政戰事務。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('吉米的爸爸', '營產官', '負責單位營產改善、管理。')"><h4 class="font-black text-blue-600 text-lg mb-1">吉米的爸爸</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">營產官</p><p class="text-slate-600 text-sm font-medium">負責單位營產改善、管理。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('呂佳芯', '美工官', '負責單位主視覺設計、美編與攝影紀實。')"><h4 class="font-black text-blue-600 text-lg mb-1">呂佳芯</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">美工官</p><p class="text-slate-600 text-sm font-medium">負責單位主視覺設計、美編與攝影紀實。</p></div>
-            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('分支長', '分支長', '負責管理及督導所屬駐地各項分支單位運作。')"><h4 class="font-black text-orange-600 text-lg mb-1">分支長</h4><p class="text-xs font-bold text-slate-400 uppercase tracking-wider mb-2">分支長</p><p class="text-slate-600 text-sm font-medium">負責管理及督導所屬駐地各項分支單位運作。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('主管 (家庭長)', '團隊最高決策與核心目標，負責行政之最終審核。')"><h4 class="font-black text-indigo-600 text-lg sm:text-xl mb-1">主管 (家庭長)</h4><p class="text-slate-600 text-sm font-medium">團隊最高決策與核心目標，負責行政之最終審核。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('營務官', '負責單位總務、行政、政戰事務。')"><h4 class="font-black text-emerald-600 text-lg sm:text-xl mb-1">營務官</h4><p class="text-slate-600 text-sm font-medium">負責單位總務、行政、政戰事務。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('營產官', '負責單位營產改善、管理。')"><h4 class="font-black text-blue-600 text-lg sm:text-xl mb-1">營產官</h4><p class="text-slate-600 text-sm font-medium">負責單位營產改善、管理。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('美工官', '負責單位主視覺設計、美編與攝影紀實。')"><h4 class="font-black text-blue-600 text-lg sm:text-xl mb-1">美工官</h4><p class="text-slate-600 text-sm font-medium">負責單位主視覺設計、美編與攝影紀實。</p></div>
+            <div class="p-5 rounded-3xl bg-white border shadow-sm cursor-pointer hover:border-indigo-600 transition-all" onclick="openTeamMemberModal('分支長', '負責管理及督導所屬駐地各項分支單位運作。')"><h4 class="font-black text-orange-600 text-lg sm:text-xl mb-1">分支長</h4><p class="text-slate-600 text-sm font-medium">負責管理及督導所屬駐地各項分支單位運作。</p></div>
           </div>`;
       }
     }
